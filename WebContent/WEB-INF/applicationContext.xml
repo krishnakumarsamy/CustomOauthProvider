@@ -20,7 +20,8 @@
     <logout logout-success-url="/index.jsp" logout-url="/logout.do"/>
   </http>
 
-<!--   <authentication-manager>
+<!--This has been changed into  bean id "clientDetails"
+	<authentication-manager>
     <authentication-provider>
       <user-service>
         <user name="marissa" password="koala" authorities="ROLE_USER" />
@@ -30,7 +31,7 @@
   </authentication-manager> -->
   
   <authentication-manager>
-  	<authentication-provider user-service-ref="userDetailServiceImpl">
+  	<authentication-provider user-service-ref="clientDetails">
    <!--  <password-encoder ref="passwordEncoder"/> -->
 	</authentication-provider>
   </authentication-manager>
@@ -44,12 +45,13 @@
                   access-token-url="/oauth/access_token"
                   require10a="false"/>
 
-  <oauth:consumer-details-service id="consumerDetails">
+  <!-- <oauth:consumer-details-service id="consumerDetails">
     <oauth:consumer name="Tonr.com" key="tonr-consumer-key" secret="SHHHHH!!!!!!!!!!" resourceName="Your Photos" resourceDescription="Your photos that you have uploaded to sparklr.com."/>
     <oauth:consumer name="iGoogle" key="www.google.com" secret="classpath:/org/springframework/security/oauth/examples/sparklr/certs/igoogle.cert" typeOfSecret="rsa-cert" resourceName="Your Photos" resourceDescription="Your photos that you have uploaded to sparklr.com."/>
-  </oauth:consumer-details-service>
+  </oauth:consumer-details-service> --> 
 
    <oauth:token-services id="tokenServices"/> 
 	<!-- <beans:bean id="tokenServices" class="org.springframework.security.oauth.examples.token.CacheProviderTokenServices"></beans:bean> -->
-	<beans:bean id="userDetailServiceImpl" class="org.springframework.security.oauth.sample.provider.ProviderUserDetailsServiceImpl"/>
+	<beans:bean id="clientDetails" class="org.springframework.security.oauth.examples.provider.ClientDetailsImpl"/>
+	<beans:bean id="consumerDetails" class="org.springframework.security.oauth.examples.sparklr.consumer.ConsumerDetailServiceImpl"/>
 </beans:beans>
